@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html prefix="og: http://ogp.me/ns# profile: http://ogp.me/ns/profile#" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Ehnd-py: EzTrans Web</title>
+    <link href="/static/sub.css" rel="stylesheet">
+</head>
+<body>
+    <hr>
+    <div class="container">
+        <select class="translate-lang" id="translate-language">
+            <option value="auto">Auto-detect</option>
+            <option value="jp">Japanese &raquo; Korean</option>
+            <option value="kr">Korean &raquo; Japanese</option>
+        </select>
+        <textarea class="translate-text" id="translate-input"></textarea>
+        <br>
+        <textarea class="translate-text" readonly id="translate-output"></textarea>
+        <br>
+        <p align=right><a href="//github.com/stypr">stypr</a>@2020</p>
+    </div>
+    <script>
+        var translate_input = document.getElementById("translate-input");
+        let typingTimer;
+        let doneTypingInterval = 300;
+
+        translate_input.addEventListener('keyup', () => {
+            clearTimeout(typingTimer);
+            if (translate_input.value) {
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            }
+        });
+
+        function doneTyping() {
+            data = new FormData();
+            data.append('text', translate_input.value);
+
+            url = "";
+            switch(document.getElementById("translate-language").value){
+                case "jp":
+                    url = "/translate_jp_kr"
+                    break;
+                case "kr":
+                    url = "/translate_kr_jp";
+                    break;
+                case "auto":
+                    url = "/translate_auto";
+                    break;
+            }
+
+            fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                body: data
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                // console.log('Success:', result);
+                document.getElementById("translate-output").value = result;
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+

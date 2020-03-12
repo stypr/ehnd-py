@@ -1,0 +1,26 @@
+/* Developed by Harold Kim 2018 */
+
+* { border:0; margin:0; }
+html, body { font-family: 'Ubuntu', sans-serif; }
+a { text-decoration:none; }
+a:visited { color: blue; }
+a:hover { text-decoration:underline; }
+hr { width:0; border:0; height:30px; }
+small { color: #333;  font-size:8pt; }
+ul, li { list-style: none; padding: 0; }
+.info { font-size:12pt; letter-spacing: -.5px; margin-top: 10px; margin-bottom: 20px; }
+.info > span { display:none; }
+.sub { font-size: 12pt; margin: 20px 0; }
+.sub > .head { font-size: 18pt; margin-bottom: 10px; }
+.sub > .body { padding-left: 30px; }
+.profile {border-radius: 1em; width:100px; margin-top:10px; }
+.tab { margin-left: 40px; }
+.tab > span { display:none; }
+.ram { position: fixed; right: 0; bottom:0; background: url(/static/ram.png) center; width:150px; height:150px; background-image:cover; background-size: cover; background-repeat: no-repeat; }
+.header { background-color: #eee; width:100%; padding: 13px 0; margin-bottom: 20px; }
+.header small { float:right; padding-top: 5px; color: #333; font-size:8pt; }
+.pad { margin: 0 10px; }
+.container { min-width: 400px; max-width:1000px; margin: 0px auto; }
+.translate-lang { border: 2px solid #ccc; margin: 3px 0; }
+.translate-text { border: 2px solid #ccc; width:100%; height:300px; font-size: 12pt; resize:vertical; }
+@media(max-width:800px){ body{ margin-left:0;margin-right:0 } .ram{ width:80px; height:80px;} }
