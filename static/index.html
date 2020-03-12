@@ -1,33 +1,42 @@
-
 <!doctype html>
-<html prefix="og: http://ogp.me/ns# profile: http://ogp.me/ns/profile#" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="google" content="notranslate">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <title>Ehnd-py: EzTrans Web</title>
-    <link href="/static/sub.css" rel="stylesheet">
+    <title>Ehnd-py &raquo; EzTrans Web</title>
+    <link href="/static/main.css" rel="stylesheet">
 </head>
 <body>
-    <hr>
     <div class="container">
+        <hr>
         <select class="translate-lang" id="translate-language">
             <option value="auto">Auto-detect</option>
             <option value="jp">Japanese &raquo; Korean</option>
             <option value="kr">Korean &raquo; Japanese</option>
         </select>
-        <textarea class="translate-text" id="translate-input"></textarea>
-        <br>
-        <textarea class="translate-text" readonly id="translate-output"></textarea>
-        <br>
-        <p align=right><a href="//github.com/stypr">stypr</a>@2020</p>
+        <p style="float:right;">by <a href="//github.com/stypr">stypr.</a></p>
+        <div class="box">
+            <div class="box-translate">
+                <textarea class="translate-text" rows="10" id="translate-input"></textarea>
+            </div>
+            <div class="box-translate">
+            <textarea class="translate-text" rows="10" readonly id="translate-output" placeholder="Translated Text goes here..."></textarea>
+            </div>
+        </div>
     </div>
     <script>
         var translate_input = document.getElementById("translate-input");
+        var translate_output = document.getElementById("translate-output");
         let typingTimer;
         let doneTypingInterval = 300;
 
+
+        translate_input.addEventListener('input', () => {
+            translate_input.style.height = 'auto';
+            translate_input.style.height = (translate_input.scrollHeight + 10) + 'px';
+        })
         translate_input.addEventListener('keyup', () => {
             clearTimeout(typingTimer);
             if (translate_input.value) {
@@ -48,7 +57,7 @@
                     url = "/translate_kr_jp";
                     break;
                 case "auto":
-                    url = "/translate_auto";
+                    url = "/translate";
                     break;
             }
 
@@ -57,10 +66,12 @@
                 mode: 'cors',
                 body: data
             })
-            .then((response) => response.json())
+            .then((response) => response.json())    
             .then((result) => {
                 // console.log('Success:', result);
-                document.getElementById("translate-output").value = result;
+                translate_output.value = result;
+                translate_output.style.height = 'auto';
+                translate_output.style.height = (translate_input.scrollHeight + 10) + 'px';
             })
             .catch((error) => {
               console.error('Error:', error);

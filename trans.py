@@ -7,9 +7,11 @@ Translation Engine
 """
 
 import os
+import sys
 import re
 from ctypes import WinDLL, c_char_p, c_int, c_wchar_p
 from ctypes.wintypes import BOOL
+
 
 class TransEngine:
     """
@@ -17,6 +19,7 @@ class TransEngine:
 
     Introduces basic methods for translation
     """
+
     trans_dir = ""
     start = None
     trans = None
@@ -37,9 +40,8 @@ class TransEngine:
 
         Convert special characters to unicode literal
         """
-        char_range = [161, 733, 65510]
+        char_range = [161, 733, 8719, 8764, 8857, 65510]
         char_range += range(8319, 8602)
-        char_range += [8719, 8764, 8857]
         char_range += range(9312, 9850)
         char_range += range(12800, 12928)
         char_range += range(13184, 13278)
@@ -56,15 +58,15 @@ class TransEngine:
         Initialize argument and return types for DLL functions
         """
         if not (self.start and self.trans):
-            return Exception("%s failed to load pointers."  % (self.__class__.__name__,))
+            return Exception("%s failed to load pointers." % (self.__class__.__name__,))
 
         self.start.argtypes = [c_char_p, c_char_p]
         self.start.restype = BOOL
         self.trans.argtypes = [c_int, c_wchar_p]
         self.trans.restype = c_wchar_p
-        self.start(
-            "CSUSER123455".encode(),
-            os.path.join(self.trans_dir, "Dat").encode()
+
+        return self.start(
+            "CSUSER123455".encode(), os.path.join(self.trans_dir, "Dat").encode()
         )
 
     def translate(self, src_text):
@@ -82,6 +84,7 @@ class TransEngineKRJP(TransEngine):
 
     Korean to Japanese Engine
     """
+
     def __init__(self, trans_dir):
         # set TransEZ dir
         self.trans_dir = trans_dir
