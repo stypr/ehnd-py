@@ -1,0 +1,40 @@
+/* Developed by Harold Kim 2020 */
+
+* { border:0; margin:0; }
+html, body { font-family: 'Ubuntu', sans-serif; }
+a { text-decoration:none; }
+a:visited { color: blue; }
+a:hover { text-decoration:underline; }
+hr { width:0; border:0; height:30px; }
+small { color: #333;  font-size:8pt; }
+ul, li { list-style: none; padding: 0; }
+.pad { margin: 0 10px; }
+.container { max-width:1000px; margin: 0px auto; }
+.container > .box { width:100%; clear: both; }
+.container > .box > .box-translate {
+    display: block;
+	float:left;
+    margin: 0% 0.5% 0 0; 
+    width: 49.5%; 
+}
+.translate-lang {
+    margin: 3px 0;
+    border: 2px solid #ccc;
+    border-radius: 0.4em;
+    font-size:12pt;
+}
+.translate-text { 
+    resize: none;
+    box-sizing: border-box;
+    border-radius: 0.4em;
+    border: 2px solid #ccc; font-size: 12pt; width:100%;
+}
+@media(max-width:650px){ 
+    html, body{ margin-left:0;margin-right:0; }
+    .container > .box > .box-translate {
+        display: block;
+        float:left;
+        margin: 0%; 
+        width: 100%; 
+    }
+}
