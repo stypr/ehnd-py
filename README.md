@@ -32,3 +32,9 @@ Ehnd-Kor (Korean->Japanese):  https://github.com/stypr/ehnd-kor
 
 가급적 `ehdn-latest.dll`을 사용해주세요.
 
+
+## License
+
+GNU GPLv3
+
+
